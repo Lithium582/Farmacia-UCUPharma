@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package Clases;
+import Interfaces.*;
 
 /**
  *
  * @author Lithium582
  */
-public class Farmacia {
+public class Farmacia implements IFarmacia {
     
 }

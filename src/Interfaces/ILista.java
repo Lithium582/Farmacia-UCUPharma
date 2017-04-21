@@ -9,6 +9,6 @@ package Interfaces;
  *
  * @author Lithium582
  */
-public interface ILista {
+public interface ILista<T> {
     
 }

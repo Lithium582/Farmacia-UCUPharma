@@ -5,10 +5,11 @@
  */
 package Clases;
 
+import Interfaces.*;
 /**
  *
  * @author Lithium582
  */
-public class Lista {
+public class Lista<T> implements ILista<T> {
     
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Clases;
+import Interfaces.*;
 
 /**
  *
@@ -12,7 +13,7 @@ package Clases;
 
 import java.time.*;
 
-public class Articulo {
+public class Articulo implements IArticulo {
     private String nombre;
     
     public String getNombre(){
