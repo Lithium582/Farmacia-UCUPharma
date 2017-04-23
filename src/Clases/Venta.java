@@ -11,5 +11,10 @@ import Interfaces.*;
  * @author Lithium582
  */
 public class Venta implements IVenta {
+    public static Integer ultimoIDGenerado = 0;
+    private Integer id;
     
+    public Integer getID(){
+        return this.id;
+    }
 }

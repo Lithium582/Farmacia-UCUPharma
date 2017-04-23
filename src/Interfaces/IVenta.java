@@ -9,6 +9,6 @@ package Interfaces;
  *
  * @author Lithium582
  */
-public interface IVenta {
+public interface IVenta extends IColeccionable{
     
 }

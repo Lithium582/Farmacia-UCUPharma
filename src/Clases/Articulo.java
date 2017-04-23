@@ -5,22 +5,150 @@
  */
 package Clases;
 import Interfaces.*;
+import java.util.*;
 
 /**
  *
  * @author VialeSoftUCU
  */
 
-import java.time.*;
-
 public class Articulo implements IArticulo {
-    private String nombre;
     
-    public String getNombre(){
-        return "no retorna nada LOL";
+    private final Integer id;
+    private Date fecha_Creacion;
+    private Date fecha_Actualizacion;
+    private double precio;
+    private String nombre;
+    private String descripcion;
+    private boolean estado;
+    private boolean refrigerado;
+    private boolean receta;
+    public Integer stock;
+    
+    /**
+     * Constructor de Artículo
+     */
+    public Articulo(){
+        this.id = 0;
     }
     
-    public void setNombre(String value){
-    
+    /**
+     *
+     * @param pID ID
+     * @param pFechaCreacion Fecha de creación
+     * @param pFechaActualizacion Fecha de actualización
+     * @param pPrecio Precio
+     * @param pNombre Nombre
+     * @param pDescripcion Descripción
+     * @param pEstado Estado
+     * @param pRefrigeracion Estado de refrigeración
+     * @param pReceta Requiere receta
+     */
+    public Articulo(Integer pID, Date pFechaCreacion, Date pFechaActualizacion, Double pPrecio, String pNombre, String pDescripcion, boolean pEstado, boolean pRefrigeracion, boolean pReceta){
+        this.id = pID;
+        this.fecha_Creacion = pFechaCreacion;
+        this.fecha_Actualizacion = pFechaActualizacion;
+        this.precio = pPrecio;
+        this.nombre = pNombre;
+        this.descripcion = pDescripcion;
+        this.estado = pEstado;
+        this.refrigerado = pRefrigeracion;
+        this.receta = pReceta;
+        this.stock = 0;
+        }
+            
+    @Override
+    public Integer getID() {
+        return this.id;        
+    }
+
+    @Override
+    public Date getFechaCreacion() {
+        return this.fecha_Creacion;
+    }
+
+    @Override
+    public void setFechaCreacion(Date value) {
+        this.fecha_Creacion = value;
+    }
+
+    @Override
+    public Date getFechaActualizacion() {
+        return this.fecha_Actualizacion;
+    }
+
+    @Override
+    public void setFechaActualizacion(Date value) {
+        this.fecha_Actualizacion = value;
+    }
+
+    @Override
+    public double getPrecio() {
+        return this.precio;
+    }
+
+    @Override
+    public void setPrecio(double value) {
+        this.precio = value;
+    }
+
+    @Override
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    @Override
+    public void setNombre(String value) {
+        this.nombre = value;
+    }
+
+    @Override
+    public String getDescripcion() {
+        return this.descripcion;
+    }
+
+    @Override
+    public void setDescripcion(String value) {
+        this.descripcion = value;
+    }
+
+    @Override
+    public boolean getEstado() {
+        return this.estado;
+    }
+
+    @Override
+    public void setEstado(boolean value) {
+        this.estado = value;
+    }
+
+    @Override
+    public boolean getRefrigerado() {
+        return this.refrigerado;
+    }
+
+    @Override
+    public void setRefrigerado(boolean value) {
+        this.refrigerado = value;
+    }
+
+    @Override
+    public boolean getReceta() {
+        return this.receta;
+    }
+
+    @Override
+    public void setReceta(boolean value) {
+        this.receta = value;
+    }
+
+    @Override
+    public int getStock() {
+        return this.stock;
+    }
+
+    @Override
+    public void setStock(Integer value) {
+        this.stock = value;
     }
 }

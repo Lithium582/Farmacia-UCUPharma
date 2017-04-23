@@ -10,5 +10,10 @@ package Interfaces;
  * @author Lithium582
  */
 public interface IColeccionable {
-    
+    /**
+     * Obtiene la ID del Elemento
+     * @return
+     */
+    public Integer getID();
+
 }
