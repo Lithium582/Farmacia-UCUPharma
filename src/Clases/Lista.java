@@ -33,7 +33,7 @@ public class Lista<T extends IColeccionable> implements ILista<T> {
     @Override
     public void Insertar(INodo<T> pNodo) {
         INodo<T> aux = this.primero;
-        aux.setSiguiente(null);
+        pNodo.setSiguiente(null);
         
         if (this.esVacia()) {
             this.primero = pNodo;
@@ -53,14 +53,21 @@ public class Lista<T extends IColeccionable> implements ILista<T> {
                 this.primero = pNodo;
             }
             else{
+                Boolean insertado = false;
                 while ((aux.getSiguiente() != null)){
-                    if (((aux.getSiguiente()).getEtiqueta()).compareTo(pNodo.getEtiqueta()) > 0){
+                    if (((aux.getSiguiente()).getEtiqueta()).compareTo(pNodo.getEtiqueta()) > 0 && aux.getEtiqueta().compareTo(pNodo.getEtiqueta())<0){
                         pNodo.setSiguiente(aux.getSiguiente()); 
                         aux.setSiguiente(pNodo);
+                        insertado = true;
                     }
                     else{
                         aux = aux.getSiguiente();
                     }
+                }
+                
+                if (!insertado){
+                    aux.setSiguiente(pNodo);
+                    insertado = true;
                 }
             }
         }

@@ -32,6 +32,7 @@ public class FarmaciaUCUPharma {
     **/
     public static void main(String[] args) {
         try{
+            Farmacia farma = new Farmacia();
             // TODO code application logic here
 
             Integer op = -1;
@@ -45,21 +46,23 @@ public class FarmaciaUCUPharma {
                 else{
                     b = !b;
                 }
-
-                System.out.println("\n1 - Stock \n2 - Ventas \n0 - SALIR \n");
+                
+                System.out.println("\n1 - CargarStock \n2 - Ventas \n0 - SALIR \n");
 
                 System.out.print("Ingrese una opción \n");
-
-                //En vez de usar la consola derecho, se recupera así el valor que ingresa el usuario
 
                 op = Integer.parseInt(br.readLine());
 
                 switch(op){
                     case 1:{
-                        System.out.println("Stock en construcción :D");
-                        System.out.println(Calendar.LONG_FORMAT);
-                        //System.out.println(c.get(Calendar.MONTH) + 1);
-                        //System.out.println(c.get(Calendar.YEAR));
+                        System.out.println("Cargando archivo");
+                        
+                        Boolean bool = farma.cargarArticulos("C:\\farmacia_articles_small.csv");
+                        
+                        if(bool){
+                            System.out.println("El archivo ha sido cargado satisfactoriamente");
+                        }
+                        
                         break;
                     }
                     case 2:{

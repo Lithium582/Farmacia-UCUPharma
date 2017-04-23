@@ -36,12 +36,10 @@ public class Farmacia implements IFarmacia {
      * @param pDireccion Direccion de la Farnacia
      * @param pTelefono Teléfono de la Farnacia
     **/
-    public Farmacia(String pNombre, String pDireccion, String pTelefono, Lista<IArticulo> pListaArticulos, Lista<IVenta> pListaVentas){
+    public Farmacia(String pNombre, String pDireccion, String pTelefono){
         this.nombre = pNombre;
         this.direccion = pDireccion;
         this.telefono = pTelefono;
-        this.listaArticulos = pListaArticulos;
-        this.listaVentas = pListaVentas;
     }
 
     @Override
@@ -81,24 +79,32 @@ public class Farmacia implements IFarmacia {
 
     @Override
     public Boolean cargarArticulos(String rutaArchivo) {
+        Integer cantErroneos = 0;
         String[] elementos = ManejadorArchivosGenerico.leerArchivo(rutaArchivo);
         
         for (int i = 1; i < elementos.length; i++){
             String[] linea = elementos[i].split(";");
             
-            Integer id = Integer.parseInt(linea[0].trim());
-            Date fecha_Creacion = FormatoFecha(linea[1].trim());
-            Date fecha_Actualizacion = FormatoFecha(linea[2].trim());
-            double precio =  Double.parseDouble((linea[3].trim()));
-            String nombre = linea[4];
-            String descripcion = linea[5];
-            boolean estado = VerificarEstado(linea[6]);
-            boolean refrigerado = VerificarBooleano(linea[7]);
-            boolean receta = VerificarBooleano(linea[8]);
-            IArticulo a = new Articulo(id,fecha_Creacion,fecha_Actualizacion,precio,nombre,descripcion,estado,refrigerado,receta);
-            this.InsertarArticulo(a);
+            if (linea.length == 9){
+                Integer id = Integer.parseInt(linea[0].trim());
+                Date fecha_Creacion = FormatoFecha(linea[1].trim());
+                Date fecha_Actualizacion = FormatoFecha(linea[2].trim());
+                double precio =  Double.parseDouble((linea[3].trim()));
+                String nombre = linea[4];
+                String descripcion = linea[5];
+                boolean estado = VerificarEstado(linea[6]);
+                boolean refrigerado = VerificarBooleano(linea[7]);
+                boolean receta = VerificarBooleano(linea[8]);
+                IArticulo a = new Articulo(id,fecha_Creacion,fecha_Actualizacion,precio,nombre,descripcion,estado,refrigerado,receta);
+                this.InsertarArticulo(a);
+            }else{
+                cantErroneos++;
+            }
         }
         
+        if (cantErroneos > 0){
+            System.out.println("Se han omitido " + cantErroneos + " registros incorrectos");
+        }
         return true;
     }
 
@@ -119,7 +125,12 @@ public class Farmacia implements IFarmacia {
 
     @Override
     public Boolean InsertarArticulo(IArticulo pArticulo) {
-        return false;
+        Nodo<IArticulo> _nodo = new Nodo<IArticulo>(pArticulo,pArticulo.getID());
+        if (this.listaArticulos == null){
+            this.listaArticulos = new Lista<IArticulo>();
+        }
+        this.listaArticulos.Insertar(_nodo);
+        return true;
     }
 
     @Override

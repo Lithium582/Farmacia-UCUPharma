@@ -1,4 +1,4 @@
-package UT03.TA2;
+package Clases;
 
 
 
@@ -59,7 +59,7 @@ public class ManejadorArchivosGenerico {
 					+ nombreCompletoArchivo);
 			e.printStackTrace();
 		}
-		System.out.println("Archivo leido satisfactoriamente");
+		//System.out.println("Archivo leido satisfactoriamente");
 
 		return listaLineasArchivo.toArray(new String[0]);
 	}
