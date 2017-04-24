@@ -5,7 +5,7 @@
  */
 package Clases;
 import Interfaces.*;
-import java.util.Date;
+import java.util.*;
 import java.text.*;
 
 /**
@@ -90,11 +90,11 @@ public class Farmacia implements IFarmacia {
                 Date fecha_Creacion = FormatoFecha(linea[1].trim());
                 Date fecha_Actualizacion = FormatoFecha(linea[2].trim());
                 double precio =  Double.parseDouble((linea[3].trim()));
-                String nombre = linea[4];
-                String descripcion = linea[5];
-                boolean estado = VerificarEstado(linea[6]);
-                boolean refrigerado = VerificarBooleano(linea[7]);
-                boolean receta = VerificarBooleano(linea[8]);
+                String nombre = linea[4].trim();
+                String descripcion = linea[5].trim();
+                boolean estado = VerificarEstado(linea[6].trim());
+                boolean refrigerado = VerificarBooleano(linea[7].trim());
+                boolean receta = VerificarBooleano(linea[8].trim());
                 IArticulo a = new Articulo(id,fecha_Creacion,fecha_Actualizacion,precio,nombre,descripcion,estado,refrigerado,receta);
                 this.InsertarArticulo(a);
             }else{
@@ -105,6 +105,11 @@ public class Farmacia implements IFarmacia {
         if (cantErroneos > 0){
             System.out.println("Se han omitido " + cantErroneos + " registros incorrectos");
         }
+        
+        if (elementos.length == 0){
+            return false;
+        }
+        
         return true;
     }
 
@@ -114,28 +119,103 @@ public class Farmacia implements IFarmacia {
     }
 
     @Override
-    public IArticulo BuscarXID(Integer id) {
-        return new Articulo();
+    public Articulo BuscarXID(Integer id) {
+        IColeccionable retorno = listaArticulos.Buscar(id).getObjeto();
+        
+        if(retorno == null){
+            return null;
+        }
+        else{
+            return (Articulo)retorno;
+        }
     }
 
     @Override
-    public IArticulo buscarXDescripcion(String descripcion) {
-        return new Articulo();
+    public String buscarXDescripcion(String pDescripcion) {
+        String cadenaRetorno = "";
+        if (listaArticulos.esVacia()) {
+            return null;
+        } else {
+            Lista<IArticulo> listaRetorno = new Lista<IArticulo>();
+            
+            INodo<IArticulo> aux = listaArticulos.getPrimero();
+            while (aux != null) {
+                String nom = aux.getObjeto().getDescripcion().toLowerCase();
+                if (nom.contains(pDescripcion.toLowerCase())) {
+                    cadenaRetorno += aux.getObjeto().toString("-") + "\n";
+                }
+                aux = aux.getSiguiente();
+            }
+        }
+        return cadenaRetorno;
+    }
+    
+    @Override
+    public String buscarXNombre(String pNombre) {
+        String cadenaRetorno = "";
+        if (listaArticulos.esVacia()) {
+            return null;
+        } else {
+            Lista<IArticulo> listaRetorno = new Lista<IArticulo>();
+            
+            INodo<IArticulo> aux = listaArticulos.getPrimero();
+            while (aux != null) {
+                String nom = aux.getObjeto().getNombre().toLowerCase();
+                if (nom.contains(pNombre.toLowerCase())) {
+                    cadenaRetorno += aux.getObjeto().toString("-") + "\n";
+                }
+                aux = aux.getSiguiente();
+            }
+        }
+        return cadenaRetorno;
     }
 
     @Override
     public Boolean InsertarArticulo(IArticulo pArticulo) {
         Nodo<IArticulo> _nodo = new Nodo<IArticulo>(pArticulo,pArticulo.getID());
+        
         if (this.listaArticulos == null){
             this.listaArticulos = new Lista<IArticulo>();
         }
-        this.listaArticulos.Insertar(_nodo);
+        
+        INodo buscado = listaArticulos.Buscar(pArticulo.getID());
+        if(buscado == null){
+            this.listaArticulos.Insertar(_nodo);
+        }else{
+            IColeccionable obj = buscado.getObjeto();
+            
+            if (obj.getClass().getName() == "Articulo"){
+                ((Articulo)obj).setDescripcion(pArticulo.getDescripcion());
+                ((Articulo)obj).setEstado(pArticulo.getEstado());
+                ((Articulo)obj).setFechaActualizacion(Calendar.getInstance().getTime());
+                ((Articulo)obj).setNombre(pArticulo.getNombre());
+                ((Articulo)obj).setPrecio(pArticulo.getPrecio());
+                ((Articulo)obj).setReceta(pArticulo.getReceta());
+                ((Articulo)obj).setRefrigerado(pArticulo.getRefrigerado());
+                ((Articulo)obj).setStock(pArticulo.getStock());
+            }
+        }
+        
         return true;
     }
 
     @Override
     public Boolean EliminarArticulo(Integer pId) {
-        return false;
+        INodo<IArticulo> buscado = listaArticulos.Buscar(pId);
+        
+        if (buscado == null){
+            System.out.println("Artículo inexistente");
+            
+            return false;
+        }
+        
+        if(buscado.getObjeto().getStock() > 0){
+            System.out.println("No se puede eliminar un artículo con stock");
+            
+            return false;
+        }
+        
+        return listaArticulos.Borrar(pId);
     }
 
     @Override
@@ -155,7 +235,11 @@ public class Farmacia implements IFarmacia {
 
     @Override
     public String retornarArticulos(String pSeparador) {
-        return "";
+        if(listaArticulos != null){
+            return listaArticulos.Print(pSeparador);
+        }
+        
+        return "Lista aún no inicializado";
     }
 
     @Override

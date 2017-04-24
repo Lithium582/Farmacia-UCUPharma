@@ -44,6 +44,7 @@ public class Articulo implements IArticulo {
      * @param pRefrigeracion Estado de refrigeración
      * @param pReceta Requiere receta
      */
+    
     public Articulo(Integer pID, Date pFechaCreacion, Date pFechaActualizacion, Double pPrecio, String pNombre, String pDescripcion, boolean pEstado, boolean pRefrigeracion, boolean pReceta){
         this.id = pID;
         this.fecha_Creacion = pFechaCreacion;
@@ -55,7 +56,7 @@ public class Articulo implements IArticulo {
         this.refrigerado = pRefrigeracion;
         this.receta = pReceta;
         this.stock = 0;
-        }
+    }
             
     @Override
     public Integer getID() {
@@ -150,5 +151,18 @@ public class Articulo implements IArticulo {
     @Override
     public void setStock(Integer value) {
         this.stock = value;
+    }
+    
+    public String toString(String pSeparador) {
+        String cadenaRetorno = this.getID().toString();
+        cadenaRetorno += " " + pSeparador.trim() + " " + "Descripción: " + this.getDescripcion();
+        cadenaRetorno += " " + pSeparador.trim() + " " + "Nombre: " + this.getNombre();
+        cadenaRetorno += " " + pSeparador.trim() + " " + "Precio: " + this.getPrecio();
+        cadenaRetorno += " " + pSeparador.trim() + " " + "Estado: " + (this.getEstado() == true ? "Activo" : "Inactivo");
+        cadenaRetorno += " " + pSeparador.trim() + " " + "Refrigerado: " + (this.getRefrigerado() == true ? "Si" : "No");
+        cadenaRetorno += " " + pSeparador.trim() + " " + "Recetado: " + (this.getReceta() == true ? "Si" : "No");
+        cadenaRetorno += " " + pSeparador.trim() + " " + "Stock: " + (this.getStock());
+        
+        return cadenaRetorno;
     }
 }

@@ -51,13 +51,9 @@ public class ManejadorArchivosGenerico {
 			br.close();
             fr.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Error al leer el archivo "
-					+ nombreCompletoArchivo);
-			e.printStackTrace();
+			System.out.println("Error al leer el archivo " + nombreCompletoArchivo);
 		} catch (IOException e) {
-			System.out.println("Error al leer el archivo "
-					+ nombreCompletoArchivo);
-			e.printStackTrace();
+			System.out.println("Error al leer el archivo " + nombreCompletoArchivo);
 		}
 		//System.out.println("Archivo leido satisfactoriamente");
 

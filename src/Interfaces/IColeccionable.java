@@ -15,5 +15,11 @@ public interface IColeccionable {
      * @return
      */
     public Integer getID();
+    
+    /**
+     * Obtiene la información más relevante del objeto
+     * @return
+     */
+    public String toString(String pSeparador);
 
 }

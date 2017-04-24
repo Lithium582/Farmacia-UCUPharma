@@ -55,7 +55,7 @@ public class Lista<T extends IColeccionable> implements ILista<T> {
             else{
                 Boolean insertado = false;
                 while ((aux.getSiguiente() != null)){
-                    if (((aux.getSiguiente()).getEtiqueta()).compareTo(pNodo.getEtiqueta()) > 0 && aux.getEtiqueta().compareTo(pNodo.getEtiqueta())<0){
+                    if (((aux.getSiguiente()).getEtiqueta()).compareTo(pNodo.getEtiqueta()) > 0 && aux.getEtiqueta().compareTo(pNodo.getEtiqueta()) < 0){
                         pNodo.setSiguiente(aux.getSiguiente()); 
                         aux.setSiguiente(pNodo);
                         insertado = true;
@@ -67,7 +67,7 @@ public class Lista<T extends IColeccionable> implements ILista<T> {
                 
                 if (!insertado){
                     aux.setSiguiente(pNodo);
-                    insertado = true;
+                    //insertado = true;
                 }
             }
         }
@@ -103,13 +103,12 @@ public class Lista<T extends IColeccionable> implements ILista<T> {
         INodo<T> aux = primero;
         if (aux.getEtiqueta().equals(pId)) {
             //Eliminamos el primer elemento
-            INodo<T> temp1 = aux;
             INodo<T> temp = aux.getSiguiente();
             primero = temp;
             return true;
         }
         while (aux.getSiguiente() != null) {
-            if (aux.getSiguiente().getEtiqueta() == pId) {
+            if (aux.getSiguiente().getEtiqueta().equals(pId)) {
                 INodo<T> temp = aux.getSiguiente();
                 aux.setSiguiente(temp.getSiguiente());
                 return true;
@@ -125,7 +124,7 @@ public class Lista<T extends IColeccionable> implements ILista<T> {
         String aux = "";
         if (!esVacia()) {
             INodo<T> temp = primero;
-            while (temp != null) {
+            while(temp != null) {
                 temp.printTag();
                 temp = temp.getSiguiente();
             }
@@ -140,9 +139,9 @@ public class Lista<T extends IColeccionable> implements ILista<T> {
             return "";
         } else {
             INodo<T> temp = primero;
-            aux = "" + temp.getEtiqueta();
+            aux = temp.getObjeto().toString(pSeparador);
             while (temp.getSiguiente() != null) {
-                aux = aux + pSeparador + temp.getSiguiente().getEtiqueta();
+                aux += "\n" + temp.getSiguiente().getObjeto().toString(pSeparador);
                 temp = temp.getSiguiente();
             }
 

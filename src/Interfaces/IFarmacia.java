@@ -81,10 +81,18 @@ public interface IFarmacia {
     /**
      * Busca un Artículo por su descripción.
      *
-     * @param descripcion Descripción del Artículo.
+     * @param pDescripcion Descripción del Artículo.
      * @return Artículo encontrado.
      */
-    public IArticulo buscarXDescripcion(String descripcion);
+    public String buscarXDescripcion(String pDescripcion);
+    
+    /**
+     * Busca un Artículo por su nombre.
+     *
+     * @param pNombre Nombre del Artículo.
+     * @return Artículo encontrado.
+     */
+    public String buscarXNombre(String pNombre);
 
     /**
      * Agregar un nuevo Artículo a la lista
