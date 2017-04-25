@@ -39,23 +39,31 @@ public class FarmaciaUCUPharma {
             Boolean b = false;
 
             while(op != 0){
+                try{
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 if (b){
+                    System.out.println("\n ------------------------------ ");
+                    System.out.println(" .... ENTER para continuar .... ");
+                    System.out.println(" ------------------------------ ");
                     br.readLine();
                 }
                 else{
                     b = !b;
                 }
                 
-                System.out.println("Bienvenido a UCUPharma\nIngrese una opción para continuar:");
-                System.out.println("1 - Cargar Stock desde archivo CSV");
-                System.out.println("2 - Crear un nuevo Artículo");
-                System.out.println("3 - Listar todos los artículos");
-                System.out.println("4 - Búsqueda");
-                System.out.println("5 - Eliminar un artículo");
-                System.out.println("6 - Realizar una venta");
-                System.out.println("7 - Devolución");
-                System.out.println("8 - Reportes");
+                System.out.println("Bienvenido/a a UCUPharma\nIngrese una opción para continuar:");
+                System.out.println("1 - Cargar Artículos desde archivo CSV");
+                System.out.println("2 - Cargar Stock desde archivo CSV");
+                System.out.println(" ------------------------------------ ");
+                System.out.println("3 - Crear un nuevo Artículo");
+                System.out.println("4 - Listar todos los artículos");
+                System.out.println("5 - Buscar Artículos");
+                System.out.println("6 - Eliminar un artículo");
+                System.out.println(" ------------------------------------ ");
+                System.out.println("7 - Realizar una venta");
+                System.out.println("8 - Devolución");
+                System.out.println("9 - Reportes");
+                System.out.println(" ------------------------------------ ");
                 System.out.print("Ingrese una opción \n");
                 
                 try{
@@ -70,16 +78,32 @@ public class FarmaciaUCUPharma {
                     case 1:{
                         System.out.println("Cargando archivo");
                         
-                        Boolean bool = farma.cargarArticulos("C:\\farmacia_articles_small.csv");
+                        System.out.println("Ingrese la dirección del archivo");
+                        String direccion = br.readLine().trim();
+                        Boolean bool = farma.cargarArticulos(direccion);
                         
                         if(bool){
                             System.out.println("El archivo ha sido cargado con éxito");
                         }
                         
-                        System.out.println(farma.getArticulos().Print());
+                        //System.out.println(farma.getArticulos().Print());
                         break;
                     }
                     case 2:{
+                        System.out.println("Cargando archivo");
+                        
+                        System.out.println("Ingrese la dirección del archivo");
+                        String direccion = br.readLine().trim();
+                        Boolean bool = farma.cargarStock(direccion);
+                        
+                        if(bool){
+                            System.out.println("El archivo ha sido cargado con éxito");
+                        }
+                        
+                        //System.out.println(farma.getArticulos().Print());
+                        break;
+                    }
+                    case 3:{
                         try{
                             System.out.println("Ingrese el ID del artículo");
                             Integer pID = Integer.parseInt(br.readLine().trim());
@@ -115,11 +139,17 @@ public class FarmaciaUCUPharma {
                         
                         break;
                     }
-                    case 3:{
-                        System.out.println(farma.retornarArticulos("-"));
+                    case 4:{
+                        String retorno = farma.retornarArticulos("-");
+                        if (retorno != ""){
+                            System.out.println(retorno);
+                        }else{
+                            System.out.println("No hay artículos en la lista");
+                        }
+                        
                         break;
                     }
-                    case 4:{
+                    case 5:{
                         try{
                             System.out.println("Ingrese su opción de búsqueda");
                             System.out.println("1 - Buscar por ID de artículo");
@@ -132,7 +162,7 @@ public class FarmaciaUCUPharma {
                                     System.out.println("Ingrese el ID del producto buscado");
                                     Integer idBusqueda = Integer.parseInt(br.readLine());
                                     
-                                    Articulo a = farma.BuscarXID(idBusqueda);
+                                    IArticulo a = farma.BuscarXID(idBusqueda);
                                     
                                     if (a == null){
                                         System.out.println("Artículo inexistente");
@@ -149,7 +179,7 @@ public class FarmaciaUCUPharma {
                                     
                                     String a = farma.buscarXNombre(nomBusqueda);
                                     
-                                    if (a == null){
+                                    if (a.equals("") || a == null){
                                         System.out.println("Artículo inexistente");
                                     }
                                     else{
@@ -164,7 +194,7 @@ public class FarmaciaUCUPharma {
                                     
                                     String a = farma.buscarXDescripcion(descBusqueda);
                                     
-                                    if (a == null){
+                                    if (a.equals("") || a == null){
                                         System.out.println("Artículo inexistente");
                                     }
                                     else{
@@ -180,7 +210,7 @@ public class FarmaciaUCUPharma {
                         }
                         break;
                     }
-                    case 5:{
+                    case 6:{
                         System.out.println("Ingrese el ID del producto a borrar");
                         Integer idBorrar = Integer.parseInt(br.readLine());
                         
@@ -194,34 +224,122 @@ public class FarmaciaUCUPharma {
                         
                         break;
                     }
-                    case 6:{
+                    case 7:{
+                        System.out.println("Ingrese el ID del producto a vender");
+                        Integer idBuscar = Integer.parseInt(br.readLine());
+                        
+                        IArticulo objArticulo = farma.BuscarXID(idBuscar);
+                        
+                        if (objArticulo == null){
+                            System.out.println("El artículo no se ha podido encontrar");
+                        }
+                        else if(objArticulo.getStock() == 0){
+                            System.out.println("El artículo no cuenta con stock");
+                        }
+                        else{
+                            System.out.println("Artículo encontrado");
+                            System.out.println(objArticulo.toString("-"));
+                            System.out.println("Ingrese la cantidad de artículos que quiere vender");
+                            Integer intCantidad = Integer.parseInt(br.readLine());
+                            Integer stock = objArticulo.getStock();
+                            
+                            if (stock >= intCantidad){
+                                objArticulo.setStock(stock - intCantidad);
+                            }
+                            else{
+                                System.out.println("El stock no es suficiente. Se ha realizado la venta de " + objArticulo.getStock() + " artículo");
+                                intCantidad = stock;
+                                objArticulo.setStock(0);
+                            }
+                            
+                            Venta objVenta = new Venta(objArticulo,intCantidad);
+                            
+                            if(farma.GuardarVenta(objVenta)){
+                                System.out.println("Venta N° " + objVenta.getID().toString() + " realizada con éxito\nUCUPharma agradece su compra :D");
+                            }else{
+                                System.out.println("No ha podido realizarse la venta");
+                            }
+                        }
                         
                         break;
                     }
-                    case 7:{
+                    case 8:{
+                        System.out.println("Ingrese el ID de la venta que se quiere devolver");
+                        Integer idVentaBuscar = Integer.parseInt(br.readLine());
                         
+                        if (farma.ReintegroVenta(idVentaBuscar)){
+                            System.out.println("Venta reintegrada con éxito");
+                        }
+                        else{
+                            System.out.println("La venta no pudo reintegrarse");
+                        }
+                        
+                        break;
+                    }
+                    case 9:{
+                        System.out.println("Listar Ventas\n0 - Listar todas\n1 - Reportes por fecha");
+                        Integer op3 = Integer.parseInt(br.readLine());
+                        
+                        if (op3 == 0){
+                            String retorno = farma.retornarVentas("-");
+                            
+                            if (retorno.equals("") || retorno == null){
+                                System.out.println("No hay ventas ingresadas");
+                            }else{
+                                System.out.println(retorno);
+                            }
+                            
+                        }
+                        else{
+                            System.out.println("Las fechas se ingresan en formato dd-MM-yyyy\nEjemplo: 25/08/2016");
+                            System.out.println("Ingrese la primera fecha");
+                            String fecha1 = br.readLine();
+                            System.out.println("Ingrese la segunda fecha");
+                            String fecha2 = br.readLine();
+                            
+                            SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
+                            
+                            try{
+                                Date dateFecha1 = dt.parse(fecha1);
+                                Date dateFecha2 = dt.parse(fecha2);
+                            
+                                String ventas = farma.ListadoVenta(dateFecha1, dateFecha2);
+
+                                if (ventas == "" || ventas == null){
+                                    System.out.println("No hay ventas en ese rango de fechas");
+                                }
+                                else{
+                                    System.out.println(ventas);
+                                }
+                            }
+                            catch(Exception ex){
+                                System.out.println("Las fechas son inválidas. Verifique el formato requerido!");
+                            }
+                        }
+                                                
                         break;
                     }
                     case 0:{
-                        System.out.println("Bai");
+                        System.out.println("----------");
+                        System.out.println("| Bái :D |");
+                        System.out.println("----------");
                         
                         break;
                     }
                     default:{
-                        System.out.println("Pusiste una opción incorrecta :D");
+                        System.out.println("Pusiste una opción incorrecta :'(");
                         break;
                     }
                 }
             }
-        }
-            catch(NumberFormatException ex){
-                System.out.println("Ingresaste una letra :/");
-            }
-            /*catch(IOException ex){
-                System.out.println("Ha habido un error al crear el objeto Buffered");
-            }*/
             catch(Exception ex){
-                System.out.println("Ha habido un error general");
+                    System.out.println("Ha habido un error general. Contacte a su administrador para más detalles");
+            }
+            }
+            
+        }
+            catch(Exception ex){
+                System.out.println("El sistema se ha detenido para evitar una explosión de su equipo");
             }
     }
 }

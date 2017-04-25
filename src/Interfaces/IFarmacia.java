@@ -151,6 +151,20 @@ public interface IFarmacia {
      * @return Productos separados.
      */
     public String retornarArticulos(String pSeparador);
+    
+    /**
+     * Imprime la lista de ventas.
+     * @return String conteniendo los items de la lista.
+     */
+    public String retornarVentas();
+
+    /**
+     * Dado un separador, imprime las ventas separadas por el caracter pasado por parámetro.
+     *
+     * @param pSeparador Separador a utilizar.
+     * @return String conteniendo los items de la lista.
+     */
+    public String retornarVentas(String pSeparador);
 
     /*
         Llama al ToString de los artículos
@@ -165,5 +179,13 @@ public interface IFarmacia {
      * @return Lista conteniendo todos los productos vendido entre
      * esas dos fechas
      */
-    public Lista<IVenta> ListadoVenta(Date pFechaComienzo, Date pFechaFin);
+    public String ListadoVenta(Date pFechaComienzo, Date pFechaFin);
+    
+    /**
+     * Mediante la carga de un archivo con extensión .csv,
+     * carga el stock de productos
+     * @param rutaArchivo Ruta del archivo.
+     * @return Retorna si la carga fue exitosa
+     */
+    public Boolean cargarStock(String rutaArchivo);
 }
