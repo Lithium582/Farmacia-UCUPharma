@@ -125,7 +125,7 @@ public class Lista<T extends IColeccionable> implements ILista<T> {
         if (!esVacia()) {
             INodo<T> temp = primero;
             while(temp != null) {
-                temp.printTag();
+                temp.PrintEtiqueta();
                 temp = temp.getSiguiente();
             }
         }

@@ -44,9 +44,9 @@ public interface INodo<T extends IColeccionable> {
     public void print();
 
     /**
-     * Imprime la tag del node
+     * Imprime la etiqueta del nodo
      */
-    public void printTag();
+    public void PrintEtiqueta();
 
     /**
      *

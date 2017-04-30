@@ -21,10 +21,18 @@ public class IColeccionableTest {
     public void testGetID() {
     }
 
+    @Test
+    public void testToString() {
+    }
+
     public class IColeccionableImpl implements IColeccionable {
 
         public Integer getID() {
             return null;
+        }
+
+        public String toString(String pSeparador) {
+            return "";
         }
     }
     

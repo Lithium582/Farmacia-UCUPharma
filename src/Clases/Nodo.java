@@ -47,7 +47,7 @@ public class Nodo<T extends IColeccionable> implements INodo<T> {
     }
 
     @Override
-    public void printTag() {
+    public void PrintEtiqueta() {
         System.out.println(etiqueta);
     }
 

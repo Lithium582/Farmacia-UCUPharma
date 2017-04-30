@@ -92,5 +92,9 @@ public class ArticuloTest {
     @Test
     public void testSetStock() {
     }
+
+    @Test
+    public void testToString() {
+    }
     
 }

@@ -32,7 +32,7 @@ public class FarmaciaUCUPharma {
     **/
     public static void main(String[] args) {
         try{
-            Farmacia farma = new Farmacia();
+            Farmacia farma = new Farmacia("UCUPharma","Wall Street 1929","666-666-6666");
             // TODO code application logic here
 
             Integer op = -1;
@@ -52,6 +52,7 @@ public class FarmaciaUCUPharma {
                 }
                 
                 System.out.println("Bienvenido/a a UCUPharma\nIngrese una opción para continuar:");
+                System.out.println(" ------------------------------------ ");
                 System.out.println("1 - Cargar Artículos desde archivo CSV");
                 System.out.println("2 - Cargar Stock desde archivo CSV");
                 System.out.println(" ------------------------------------ ");
@@ -63,7 +64,9 @@ public class FarmaciaUCUPharma {
                 System.out.println("7 - Realizar una venta");
                 System.out.println("8 - Devolución");
                 System.out.println("9 - Reportes");
+                System.out.println("10 - Información");
                 System.out.println(" ------------------------------------ ");
+                System.out.println("0 - SALIR");
                 System.out.print("Ingrese una opción \n");
                 
                 try{
@@ -319,10 +322,20 @@ public class FarmaciaUCUPharma {
                                                 
                         break;
                     }
+                    case 10:{
+                        System.out.println("--------------------------------------------------------------------------------");
+                        System.out.println("Sistema desarrollado por Lithium582 Software Solutions especialmente para");
+                        System.out.println(farma.getNombre() + " Sociedad Farmacéutica de Capital Variable");
+                        System.out.println("Teléfono: " + farma.getTelefono());
+                        System.out.println("Dirección: " + farma.getDireccion());
+                        System.out.println("--------------------------------------------------------------------------------");
+                        break;
+                    }
                     case 0:{
                         System.out.println("----------");
                         System.out.println("| Bái :D |");
                         System.out.println("----------");
+                        br.readLine();
                         
                         break;
                     }

@@ -14,6 +14,7 @@ import java.util.*;
 
 public class Articulo implements IArticulo {
     
+    // <editor-fold defaultstate="extended" desc="Atributos">
     private final Integer id;
     private Date fecha_Creacion;
     private Date fecha_Actualizacion;
@@ -23,8 +24,11 @@ public class Articulo implements IArticulo {
     private boolean estado;
     private boolean refrigerado;
     private boolean receta;
-    public Integer stock;
+    private Integer stock;
     
+    // </editor-fold>
+
+    // <editor-fold defaultstate="extended" desc="Constructores">
     /**
      * Constructor de Artículo
      */
@@ -57,7 +61,10 @@ public class Articulo implements IArticulo {
         this.receta = pReceta;
         this.stock = 0;
     }
-            
+    
+    // </editor-fold>
+
+    // <editor-fold defaultstate="extended" desc="Propiedades">
     @Override
     public Integer getID() {
         return this.id;        
@@ -114,12 +121,12 @@ public class Articulo implements IArticulo {
     }
 
     @Override
-    public boolean getEstado() {
+    public Boolean getEstado() {
         return this.estado;
     }
 
     @Override
-    public void setEstado(boolean value) {
+    public void setEstado(Boolean value) {
         this.estado = value;
     }
 
@@ -153,16 +160,25 @@ public class Articulo implements IArticulo {
         this.stock = value;
     }
     
+    //</ editor-fold>
+
+    // <editor-fold defaultstate="extended" desc="Funciones y Métodos">
     public String toString(String pSeparador) {
         String cadenaRetorno = this.getID().toString();
-        cadenaRetorno += " " + pSeparador.trim() + " " + "Descripción: " + this.getDescripcion();
         cadenaRetorno += " " + pSeparador.trim() + " " + "Nombre: " + this.getNombre();
+        cadenaRetorno += " " + pSeparador.trim() + " " + "Descripción: " + this.getDescripcion();
         cadenaRetorno += " " + pSeparador.trim() + " " + "Precio: " + this.getPrecio();
-        cadenaRetorno += " " + pSeparador.trim() + " " + "Estado: " + (this.getEstado() == true ? "Activo" : "Inactivo");
+        if (this.getEstado() == null){
+            cadenaRetorno += " " + pSeparador.trim() + " " + "Estado: NULL";
+        }
+        else{
+            cadenaRetorno += " " + pSeparador.trim() + " " + "Estado: " + (this.getEstado() == true ? "Activo" : "Inactivo");
+        }
         cadenaRetorno += " " + pSeparador.trim() + " " + "Refrigerado: " + (this.getRefrigerado() == true ? "Si" : "No");
         cadenaRetorno += " " + pSeparador.trim() + " " + "Recetado: " + (this.getReceta() == true ? "Si" : "No");
         cadenaRetorno += " " + pSeparador.trim() + " " + "Stock: " + (this.getStock());
         
         return cadenaRetorno;
     }
+    // </editor-fold>
 }

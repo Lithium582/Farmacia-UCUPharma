@@ -92,8 +92,8 @@ public class IArticuloTest {
 
     public class IArticuloImpl implements IArticulo {
 
-        public Integer getID() {
-            return 5;     
+        public Integer getID(){
+            return 5;
         }
         
         public Date getFechaCreacion() {
@@ -131,11 +131,11 @@ public class IArticuloTest {
         public void setDescripcion(String value) {
         }
 
-        public boolean getEstado() {
-            return false;
+        public Boolean getEstado() {
+            return null;
         }
 
-        public void setEstado(boolean value) {
+        public void setEstado(Boolean value) {
         }
 
         public boolean getRefrigerado() {
@@ -157,6 +157,10 @@ public class IArticuloTest {
         }
 
         public void setStock(Integer value) {
+        }
+        
+        public String toString(String separador){
+            return "";
         }
     }
     

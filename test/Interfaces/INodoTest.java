@@ -38,7 +38,7 @@ public class INodoTest {
     }
 
     @Test
-    public void testPrintTag() {
+    public void testPrintEtiqueta() {
     }
 
     @Test
@@ -72,7 +72,7 @@ public class INodoTest {
         public void print() {
         }
 
-        public void printTag() {
+        public void PrintEtiqueta() {
         }
 
         public boolean equals(INodo<T> pNodo) {

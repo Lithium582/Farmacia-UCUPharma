@@ -50,7 +50,7 @@ public class FarmaciaTest {
     }
 
     @Test
-    public void testGuardarArticulos() {
+    public void testCargarStock() {
     }
 
     @Test
@@ -59,6 +59,10 @@ public class FarmaciaTest {
 
     @Test
     public void testBuscarXDescripcion() {
+    }
+
+    @Test
+    public void testBuscarXNombre() {
     }
 
     @Test
@@ -86,11 +90,19 @@ public class FarmaciaTest {
     }
 
     @Test
+    public void testRetornarVentas_0args() {
+    }
+
+    @Test
+    public void testRetornarVentas_String() {
+    }
+
+    @Test
     public void testListadoVenta() {
     }
 
     @Test
-    public void testFormatoFecha() {
+    public void testFormatoFecha() throws Exception {
     }
     
 }

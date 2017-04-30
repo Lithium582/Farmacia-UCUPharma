@@ -64,13 +64,6 @@ public interface IFarmacia {
     public Boolean cargarArticulos(String rutaArchivo);
     
     /**
-     * Guarda los elementos de la lista en un archivo
-     * con extensión .csv
-     * @return Retorna si la carga fue exitosa
-     */
-    public Boolean guardarArticulos();
-    
-    /**
      * Dado un ID de Artículo, nos indica si existe en el Stock.
      *
      * @param id ID del Artículo a buscar.

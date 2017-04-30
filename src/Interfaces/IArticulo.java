@@ -76,13 +76,13 @@ public interface IArticulo extends IColeccionable {
      * Retorna el estado del Articulo
      * @return
      */
-    public boolean getEstado();
+    public Boolean getEstado();
 
     /**
      * Carga un valor al estado del Articulo
      * @param value Valor
      */
-    public void setEstado(boolean value);
+    public void setEstado(Boolean value);
     
     /**
      * Retorna la necesidad de refrigeración del Articulo

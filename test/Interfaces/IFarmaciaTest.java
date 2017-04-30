@@ -52,15 +52,15 @@ public class IFarmaciaTest {
     }
 
     @Test
-    public void testGuardarArticulos() {
-    }
-
-    @Test
     public void testBuscarXID() {
     }
 
     @Test
     public void testBuscarXDescripcion() {
+    }
+
+    @Test
+    public void testBuscarXNombre() {
     }
 
     @Test
@@ -88,7 +88,19 @@ public class IFarmaciaTest {
     }
 
     @Test
+    public void testRetornarVentas_0args() {
+    }
+
+    @Test
+    public void testRetornarVentas_String() {
+    }
+
+    @Test
     public void testListadoVenta() {
+    }
+
+    @Test
+    public void testCargarStock() {
     }
 
     public class IFarmaciaImpl implements IFarmacia {
@@ -123,16 +135,16 @@ public class IFarmaciaTest {
             return null;
         }
 
-        public Boolean guardarArticulos() {
-            return null;
-        }
-
         public IArticulo BuscarXID(Integer id) {
             return null;
         }
 
-        public IArticulo buscarXDescripcion(String descripcion) {
-            return null;
+        public String buscarXDescripcion(String pDescripcion) {
+            return "";
+        }
+
+        public String buscarXNombre(String pNombre) {
+            return "";
         }
 
         public Boolean InsertarArticulo(IArticulo pArticulo) {
@@ -159,7 +171,19 @@ public class IFarmaciaTest {
             return "";
         }
 
-        public Lista<IVenta> ListadoVenta(Date pFechaComienzo, Date pFechaFin) {
+        public String retornarVentas() {
+            return "";
+        }
+
+        public String retornarVentas(String pSeparador) {
+            return "";
+        }
+
+        public String ListadoVenta(Date pFechaComienzo, Date pFechaFin) {
+            return "";
+        }
+
+        public Boolean cargarStock(String rutaArchivo) {
             return null;
         }
     }

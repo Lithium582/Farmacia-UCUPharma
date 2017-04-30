@@ -20,5 +20,33 @@ public class VentaTest {
     @Test
     public void testGetID() {
     }
+
+    @Test
+    public void testGetFecha() {
+    }
+
+    @Test
+    public void testGetIdArticulo() {
+    }
+
+    @Test
+    public void testSetIdArticulo() {
+    }
+
+    @Test
+    public void testGetCantidad() {
+    }
+
+    @Test
+    public void testSetCantidad() {
+    }
+
+    @Test
+    public void testGetValorFinal() {
+    }
+
+    @Test
+    public void testToString() {
+    }
     
 }

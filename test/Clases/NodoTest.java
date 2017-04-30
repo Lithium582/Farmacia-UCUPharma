@@ -38,7 +38,7 @@ public class NodoTest {
     }
 
     @Test
-    public void testPrintTag() {
+    public void testPrintEtiqueta() {
     }
 
     @Test

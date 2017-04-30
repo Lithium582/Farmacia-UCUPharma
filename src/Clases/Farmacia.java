@@ -13,11 +13,16 @@ import java.text.*;
  * @author Lithium582
  */
 public class Farmacia implements IFarmacia {
-    private final String nombre;
-    private String direccion;
-    private String telefono;
-    private Lista<IArticulo> listaArticulos;
-    private Lista<IVenta> listaVentas;
+    
+    // <editor-fold defaultstate="extended" desc="Atributos">
+        private final String nombre;
+        private String direccion;
+        private String telefono;
+        private Lista<IArticulo> listaArticulos;
+        private Lista<IVenta> listaVentas;
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="extended" desc="Constructores">
     
     /**
      * Constructor de Farmacia
@@ -44,6 +49,9 @@ public class Farmacia implements IFarmacia {
         this.listaVentas = new Lista<IVenta>();
     }
 
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="extended" desc="Propiedades">
     @Override
     public String getDireccion() {
         return this.direccion;
@@ -79,6 +87,9 @@ public class Farmacia implements IFarmacia {
         return this.listaVentas;
     }
 
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="extended" desc="Métodos y Funciones">
     @Override
     public Boolean cargarArticulos(String rutaArchivo) {
         Integer cantErroneos = 0;
@@ -95,7 +106,7 @@ public class Farmacia implements IFarmacia {
                     double precio =  Double.parseDouble((linea[3].trim()));
                     String nombre = linea[4].trim();
                     String descripcion = linea[5].trim();
-                    boolean estado = VerificarEstado(linea[6].trim());
+                    Boolean estado = VerificarEstado(linea[6].trim());
                     boolean refrigerado = VerificarBooleano(linea[7].trim());
                     boolean receta = VerificarBooleano(linea[8].trim());
                     IArticulo a = new Articulo(id,fecha_Creacion,fecha_Actualizacion,precio,nombre,descripcion,estado,refrigerado,receta);
@@ -136,7 +147,8 @@ public class Farmacia implements IFarmacia {
                 if(nodo != null){
                     IArticulo articuloBuscado = nodo.getObjeto();
                     if(articuloBuscado != null){
-                        articuloBuscado.setStock(stock);
+                        Integer stockActual = articuloBuscado.getStock();
+                        articuloBuscado.setStock(stockActual + stock);
                     }
                     else{
                         cantErroneos++;
@@ -160,11 +172,6 @@ public class Farmacia implements IFarmacia {
         }
         
         return true;
-    }
-
-    @Override
-    public Boolean guardarArticulos() {
-        return false;
     }
 
     @Override
@@ -360,15 +367,13 @@ public class Farmacia implements IFarmacia {
         return cadenaRetorno;
     }
     
-    // <editor-fold defaultstate="extended" desc="Funciones y Métodos">
-    
-       /**
-        * Metodo auxiliar que, dada una string con formato de fecha, la convierte
+    /**
+        * Método auxiliar que, dada una string con formato de fecha, la convierte
         * en un dato de tipo Date.
-        * @param aDate Fecha a castear.
+        * @param pFecha Fecha a castear.
         * @return Fecha en formato Date.
-       **/
-       public Date FormatoFecha (String pFecha) throws ParseException{
+    **/
+    public Date FormatoFecha (String pFecha) throws ParseException{
            try {
                SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                Date date = dt.parse(pFecha);
@@ -387,16 +392,20 @@ public class Farmacia implements IFarmacia {
         * @param str String a verificar.
         * @return Valor booleano correspondiente.
         */
-       private boolean VerificarEstado (String str) throws Exception{
+       private Boolean VerificarEstado(String value) throws Exception{
+           value = value.trim();
            try {
-               if ("Activo".equals(str) || "activo".equals(str)){
+               if (value.toUpperCase().equals("ACTIVO")){
                    return true; 
                }
-               if ("Inactivo".equals(str) || "inactivo".equals(str)){
+               else if (value.toLowerCase().equals("inactivo")){
                    return false;
                }
+               else if (value.equals("")){
+                   return null;
+               }
                else {
-                   throw new Exception("El valor " + str + " no es valido. Debe ser Activo/Inactivo.");
+                   throw new Exception("El valor " + value + " no es valido. Debe ser Activo/Inactivo.");
                }
            } catch (Exception ex) {
                throw ex;
@@ -410,16 +419,16 @@ public class Farmacia implements IFarmacia {
         * @param str String a verificar.
         * @return Valor booleano correspondiente.
         */
-       private boolean VerificarBooleano(String str) throws Exception{
+       private Boolean VerificarBooleano(String value) throws Exception{
            try {
-               if ("True".equals(str) || "true".equals(str)){
+               if ("True".equals(value) || "true".equals(value)){
                    return true;
                }
-               if ("False".equals(str) || "false".equals(str)){
+               if ("False".equals(value) || "false".equals(value)){
                    return false;
                }
                else {
-                   throw new Exception("El valor " + str + " no es valido. Debe ser true/false.");
+                   throw new Exception("El valor " + value + " no es valido");
                }
            }
            catch (Exception ex){

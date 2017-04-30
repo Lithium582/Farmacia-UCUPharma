@@ -15,7 +15,7 @@ import java.util.*;
 public class Venta implements IVenta {
     
     // <editor-fold defaultstate="extended" desc="Atributos">
-        public static Integer ultimoIDGenerado = 0;
+        private static Integer ultimoIDGenerado = 0;
         private Integer id;
         private Date Fecha;
         private Integer idArticulo;
